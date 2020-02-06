@@ -1,0 +1,18 @@
+<h1>Page de Login</h1>
+
+<h4 *ngIf="error">{{error}}</h4>
+<form (ngSubmit)="login()">
+  <div class="form-group col-3">
+    <label for="username">Nom d'utilisateur</label>
+    <input type="text" name="username" class="form-control" [(ngModel)]="username" />
+  </div>
+  <div class="form-group col-3">
+    <label for="password">Mot de passe</label>
+    <input type="password" name="password" class="form-control" [(ngModel)]="password" />
+  </div>
+  <div class="form-group col-3 boutons">
+    <button class="btn btn-primary" type="submit">Se connecter</button>
+
+    <a href="#" routerLink="/register" routerLinkActive="active"><button class="btn btn-primary" type="button">S'inscrire</button></a>
+  </div>
+</form>

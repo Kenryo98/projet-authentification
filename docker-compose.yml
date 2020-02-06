@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+  nodejs:
+    build:
+      context: back
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: nodejs
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./back:/home/node/app
+    networks:
+      - bridge_node
+    links:
+      - mysql # link this service to the database service
+
+  web:
+    build:
+      context: front
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80" # specify port forewarding
+    container_name: front-container
+    restart: always
+    volumes:
+       - ./front:/home/node/app
+    networks:
+      - bridge_node
+
+  mysql:
+    container_name: binome-mysql
+    image: mysql:8.0.19
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_DATABASE=binome
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=binome
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    volumes:
+      - ./bdd/dbinit:/docker-entrypoint-initdb.d
+      - ./bdd/dbconf/dbconf.cnf:/etc/mysql/conf.d/dbconf.cnf
+      - data_mysql:/var/lib/mysql
+    networks:
+      - bridge_node
+
+  phpmyadmin:
+    container_name: binome-phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 2021:80
+    environment:
+      - PMA_HOST=mysql
+    networks:
+      - bridge_node
+
+networks:
+  bridge_node:
+
+volumes:
+  data_mysql:
