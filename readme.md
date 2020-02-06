@@ -2,6 +2,8 @@
 
 Projet d'authentification licence professionnelle web de lannion.
 
+Groupe de projet : Adrien Le Deunff et Hugo Boistuaud
+
 
 # Installation du projet
 
