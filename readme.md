@@ -1,9 +1,10 @@
-# Note de frais
+# Projet d'authentification
 
-Projet webservices licence professionnelle web de lannion.
+Projet d'authentification licence professionnelle web de lannion.
 
 
-# Installation
+# Installation du projet
+
 Commencer par cloner le projet dans un répertoire local.
 
 `git clone https://gitlab.com/breizhsurfer/server.git`
@@ -14,35 +15,30 @@ Commande à effectuer dans le répertoire back situé à la racine :
 `npm install`
 
 
-Commande à effectuer dans le répertoire front situé à la racine :
-
-`npm install`
-
-
 # Lancement du projet
+
 Effectuer cette commande depuis la racine du projet
 
-`docker-compose up -d`
+`docker-compose up -d --build`
 
 
-
-# Port phpMyAdmin
-
-localhost:2021
-
-
-# Port front
-
-localhost:4200 
-
-
-
-
-# Identifiants du back-end
-MYSQL_DATABASE=noteDeFrais
-
-MYSQL_USER=admin
-
-MYSQL_PASSWORD=hugoLPB
-
-Pour les changer, modifier le fichier docker-compose.yml situé à la racine du projet
+# Tests
+### remarque :
+On pourrait être tenté de se déplacer dans l'application en changeant le chemin dans l'url. L'application front étant buildé pour tourner dans un nginx, si l'on tente de se déplacer comme cela dans l'application, nginx n'arrive pas à trouver la vue adéquate à afficher. Il faut utiliser l'interface graphique pour se déplacer dans l'application.
+La page protégée par le login est néanmoins bien sécurisée et ne peut être atteinte sans passer par la phase de connexion (il faut avoir un token pour y avoir accès).
+### Action : 
+Tenter de se connecter sans s'inscrire.
+### Comportement attendu :
+Connexion refusée
+### Action : 
+S'inscrire avec des 2 mots de passe différents
+### Comportement attendu :
+Inscription échouée
+### Action : 
+S'inscrire avec un nom d'utilisateur déjà pris
+### Comportement attendu :
+Inscription échouée
+### Action : 
+Une fois inscrit, se connecter avec les mêmes identifiants
+### Comportement attendu :
+Connexion réussie
