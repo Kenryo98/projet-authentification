@@ -23,6 +23,8 @@ Effectuer cette commande depuis la racine du projet
 
 `docker-compose up -d --build`
 
+Pour accéder à l'application l'url est : http://localhost:8080
+
 
 # Tests
 ### remarque :
